@@ -1,0 +1,32 @@
+Omega: Synthetic WiFi CSI Generator for Human Activity Recognition
+This repository contains a high-fidelity synthetic data generation pipeline for WiFi Channel State Information (CSI) based human sensing. The system simulates realistic electromagnetic propagation in indoor environments, specifically modeling the interaction between WiFi signals (2.4/5GHz) and dynamic human motion.
+
+Project Overview
+The core objective of this project is to generate large-scale, mathematically rigorous datasets to train Deep Learning models for Human Activity Recognition (HAR) and biometric sensing. Unlike simple statistical models, this generator uses Ray Tracing (via NVIDIA Warp) to simulate the physical properties of RF signals, including reflection, diffraction, and scattering.
+
+Key Features
+Diffraction-Aware Ray Tracing: Utilizes a custom port of NVIDIA Sionna's ray tracing primitives to simulate Multipath Propagation. It calculates the signal path from Transmitter (Tx) to Receiver (Rx), accounting for occlusions and material dielectric properties.
+Procedural Bio-Kinematics: Implements a "Bio-Digital Twin" that simulates human motion. Beyond simple skeletal animation, it models:
+Respiratory Mechanics: Chest expansion and contraction.
+Micro-Doppler Signatures: Subtle vibrations from heart rate and muscle tremors.
+Gait Variance: Procedural walking styles with adjustable speed and distress levels.
+Hardware Impairment Simulation: Models real-world hardware imperfections found in commodity WiFi cards (e.g., Intel AX210), including:
+Thermal Noise Floor.
+IQ Imbalance (In-phase/Quadrature phase mismatch).
+Phase Drift (Oscillator instability).
+Architecture
+The project is modularized into three main engines:
+
+Motion Engine (src/data_generator/motion/)
+Generates 3D skeletal poses (52 joints).
+Supports both AMASS (Motion Capture) datasets and procedural inverse kinematics.
+Physics Engine (src/physics/)
+SovereignRT: The core ray tracer built on NVIDIA Warp for GPU acceleration.
+Dielectrics: Database of material properties (permittivity, conductivity) for concrete, wood, glass, and human tissue.
+Radio Engine (src/data_generator/engine/)
+Simulates the RF front-end, converting geometric ray paths into complex-valued CSI matrices (Amplitude & Phase).
+Technologies Used
+Language: Python 3.10+
+Compute Kernels: NVIDIA Warp (CUDA-accelerated kernel programming for ray tracing).
+Standard Libraries: PyTorch (Tensor operations), NumPy (Math), Trimesh (Scene geometry).
+Physics References: ITU-R P.2040-1 (Material interaction models).
