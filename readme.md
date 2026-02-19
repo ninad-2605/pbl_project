@@ -1,4 +1,4 @@
-# 👻 SPECTRE: Spectral Sensing & Physics-Grounded CSI Synthesis
+# 👻 SPECTRE: From Signals to Motion: A Physics-Grounded Wi-fi Data Generator
 ### *High-Fidelity Synthetic WiFi CSI Generator for Human Activity Recognition*
 
 [![Engine: SovereignRT](https://img.shields.io/badge/Engine-SovereignRT-red?style=for-the-badge)](https://github.com/)
